@@ -1,4 +1,6 @@
 package com.company;
+import javax.swing.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Random;
 public class Main {
@@ -27,7 +29,19 @@ public class Main {
             do {
                 // get guess
                 System.out.println("Take a guess.");
-                guess = myInput.nextInt();
+                boolean goodinput = false;
+                do {
+                    try{
+                        guess = myInput.nextInt();
+                        goodinput=true;
+                    }
+                    catch(InputMismatchException e) {
+                        System.out.println("Incorrect response: Enter a number");
+                        myInput.nextLine();
+                        goodinput=false;
+                    }
+                } while(!goodinput);
+
                 numguess++;
                 // check guess
                 if (guess > randint) {
@@ -39,8 +53,21 @@ public class Main {
             // get play again
             System.out.println("Good job, "+name+"! You guessed my number in "+ Integer.toString(numguess) +" guesses!");
             System.out.println("Would you like to play again? (y or n)");
-            playagain = (char) myInput.next().charAt(0);
 
+            boolean goodinput = false;
+            do {
+                try {
+                    playagain = (char) myInput.next().charAt(0);
+                    if (!(playagain == 'n' || playagain == 'y')) {
+                        throw new InputMismatchException("not y or n");
+                    }
+                    goodinput = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Incorect input: enter (y or n)");
+                    myInput.nextLine();
+                    goodinput = false;
+                }
+            } while(!goodinput);
         }while(playagain == 'y');
     }
 }
