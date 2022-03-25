@@ -1,4 +1,5 @@
 package com.company;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Main {
 
@@ -11,25 +12,36 @@ public class Main {
         System.out.println("Which cave will you go into? (1 or 2)");
         // read an integer from the console
         Scanner myInput = new Scanner(System.in);
-        String input = myInput.nextLine();
+        boolean goodinput = false;
+        int cavenum = 1;
+        do {
+            try {
+                cavenum = myInput.nextInt();
+                if (!(cavenum==1||cavenum==2)) {
+                    throw new InputMismatchException("not 1 or 2");
+                }
+                goodinput = true;
+            }
+            catch(InputMismatchException e) {
+                System.out.println("Incorrect input: enter (1 or 2)");
+                myInput.nextLine();
+                goodinput = false;
+            }
+        } while(!goodinput);
 
         // test for user input equal to 1
-        if(input.equals("1")){
+        if(cavenum==1){
             System.out.println("You approach the cave...");
             System.out.println("It is dark and spooky...");
             System.out.println("A large dragon jumps out in front of you! He opens his jaws and...");
             System.out.println("Gobbles you down in one bite!");
         }
         // test if user input equal to 2
-        else if (input.equals("2")){
+        else if (cavenum==2){
             System.out.println("You approach the cave...");
             System.out.println("It is dark and spooky...");
             System.out.println("A large dragon jumps out in front of you! He opens his jaws and...");
             System.out.println("says 'come share my treasure!'");
-        }
-        // error handling
-        else {
-            System.out.println("invalid input");
         }
     }
 }
