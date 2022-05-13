@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="student" class="org.example.Student">
+        <property name="id" value="34365"/>
+        <property name="name" value="Joe"/>
+        <property name="ph">
+            <list>
+                <ref bean="phone1"/>
+                <ref bean="phone2"/>
+                <ref bean="phone3"/>
+            </list>
+        </property>
+        <property name="add" ref="address"/>
+    </bean>
+
+    <bean id="phone1" class="org.example.Phone">
+        <property name="mob" value="123-456-7890"/>
+    </bean>
+
+    <bean id="phone2" class="org.example.Phone">
+        <property name="mob" value="098-765-4321"/>
+    </bean>
+
+    <bean id="phone3" class="org.example.Phone">
+        <property name="mob" value="111-222-3333"/>
+    </bean>
+
+    <bean id="address" class="org.example.Address">
+        <property name="city" value="Cleveland"/>
+        <property name="state" value="Ohio"/>
+        <property name="country" value="USA"/>
+        <property name="zipcode" value="44024"/>
+    </bean>
+</beans>
